@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipesTableComponent } from './components/recipes-table/recipes-table.component';
 
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { RecipeService } from './services/recipe.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
+import { RecipeService } from './services/recipe.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RecipeDetailsComponent],
   providers: [RecipeService],
   bootstrap: [AppComponent],
   imports: [
@@ -23,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     HttpClientModule,
     RecipesTableComponent,
+    MatDialogModule,
   ],
 })
 export class AppModule {}

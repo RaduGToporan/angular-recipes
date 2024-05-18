@@ -10,4 +10,8 @@ export class RecipeService {
   getRecipes(page: number, size: number) {
     return this.httpClient.get(`/api/recipes?page=${page}&size=${size}`);
   }
+
+  getRecipeDetails(id: string) {
+    return this.httpClient.get(`/api/recipes/${id}`);
+  }
 }
