@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.paginator-top-left {
+    float: left;
+    /* Aligns the paginator to the left */
+    width: 100%;
+    /* Ensures the paginator width matches its container for proper alignment */
+}
+
+.paginator-container {
+    display: flex;
+    align-items: flex-start;
+    /* Aligns items to the top */
+    justify-content: flex-start;
+    /* Aligns content to the left */
+    width: 100%;
+    margin-bottom: 20px;
+    /* Adds space below the paginator */
+}
+
+.mat-paginator {
+    width: auto;
+    /* Allows the paginator to shrink to fit its content */
+}
