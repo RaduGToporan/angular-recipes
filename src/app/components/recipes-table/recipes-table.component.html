@@ -1,5 +1,12 @@
+<div class="search-container">
+    <mat-form-field appearance="fill">
+        <mat-label>Search by Name</mat-label>
+        <input matInput placeholder="Enter a recipe name" [(ngModel)]="searchTerm" (keyup)="applyFilter()">
+    </mat-form-field>
+</div>
+
 <div class="paginator-container">
-    <mat-paginator #paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 20, 100]" (page)="loadRecipes(paginator.pageIndex, paginator.pageSize)" aria-label="Select page">
+    <mat-paginator #paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 20, 100]" (page)="loadRecipes(paginator.pageIndex, paginator.pageSize, searchTerm)" aria-label="Select page">
     </mat-paginator>
 </div>
 

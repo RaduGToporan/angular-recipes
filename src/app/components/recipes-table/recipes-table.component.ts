@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -10,11 +12,12 @@ import { RecipeDetailsComponent } from '../recipe-details/recipe-details.compone
   templateUrl: './recipes-table.component.html',
   styleUrls: ['./recipes-table.component.scss'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule, MatInputModule, FormsModule],
 })
 export class RecipesTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'author', 'skillLevel', 'ingredients'];
   dataSource = new MatTableDataSource<any>([]);
+  searchTerm: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -27,8 +30,8 @@ export class RecipesTableComponent implements AfterViewInit {
     this.loadRecipes(0, this.paginator.pageSize);
   }
 
-  loadRecipes(page: number, size: number): void {
-    this.recipeService.getRecipes(page, size).subscribe({
+  loadRecipes(page: number, size: number, searchTerm: string = ''): void {
+    this.recipeService.getRecipes(page, size, searchTerm).subscribe({
       next: (data: any) => {
         this.dataSource.data = data.content;
         this.paginator.length = data.totalElements;
@@ -48,5 +51,10 @@ export class RecipesTableComponent implements AfterViewInit {
       },
       error: (error) => console.error('Error fetching recipe details:', error),
     });
+  }
+
+  applyFilter(): void {
+    this.paginator.pageIndex = 0;
+    this.loadRecipes(0, this.paginator.pageSize, this.searchTerm);
   }
 }
