@@ -12,9 +12,10 @@ import { MatTableModule } from '@angular/material/table';
 import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 import { RecipesTableComponent } from './components/recipes-table/recipes-table.component';
 import { RecipeService } from './services/recipe.service';
+import { AuthorRecipesDialogComponent } from './components/author-recipes-dialog/author-recipes-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, RecipeDetailsComponent],
+  declarations: [AppComponent, RecipeDetailsComponent, AuthorRecipesDialogComponent],
   providers: [RecipeService],
   bootstrap: [AppComponent],
   imports: [

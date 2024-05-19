@@ -12,6 +12,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable, distinctUntilChanged, switchMap } from 'rxjs';
 import { IngredientService } from 'src/app/services/ingredient-service.service';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { AuthorRecipesDialogComponent } from '../author-recipes-dialog/author-recipes-dialog.component';
 import { RecipeDetailsComponent } from '../recipe-details/recipe-details.component';
 
 @Component({
@@ -127,5 +128,20 @@ export class RecipesTableComponent implements AfterViewInit {
       this.searchTerm,
       this.selectedIngredients
     );
+  }
+
+  openAuthorRecipesDialog(authorName: string, event: MouseEvent): void {
+    event.stopPropagation(); // Stop row click event
+    this.recipeService.getRecipesByAuthorName(authorName).subscribe({
+      next: (response) => {
+        this.dialog.open(AuthorRecipesDialogComponent, {
+          width: '500px',
+          data: { authorName: authorName, recipes: response.content },
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching recipes by author:', error);
+      },
+    });
   }
 }

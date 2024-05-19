@@ -1,0 +1,10 @@
+<h1>Recipes by {{ data.authorName }}</h1>
+<ul>
+    <li *ngFor="let recipe of data.recipes">
+        <h2>{{ recipe.name }}</h2>
+        <p><strong>Skill Level:</strong> {{ recipe.skillLevel }}</p>
+        <p><strong>Preparation Time:</strong> {{ recipe.preparationTime }} minutes</p>
+        <p><strong>Cooking Time:</strong> {{ recipe.cookingTime }} minutes</p>
+        <p><strong>Description:</strong> {{ recipe.description }}</p>
+    </li>
+</ul>

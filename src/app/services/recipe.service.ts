@@ -31,4 +31,10 @@ export class RecipeService {
   getRecipeDetails(id: string) {
     return this.httpClient.get(`/api/recipes/${id}`);
   }
+
+  getRecipesByAuthorName(authorName: string): Observable<any> {
+    return this.httpClient.get(`/api/recipes/author`, {
+      params: { authorName },
+    });
+  }
 }
