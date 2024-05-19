@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,12 +8,24 @@ import { Injectable } from '@angular/core';
 export class RecipeService {
   constructor(private httpClient: HttpClient) {}
 
-  getRecipes(page: number, size: number, searchTerm: string = '') {
-    let url = `/api/recipes?page=${page}&size=${size}`;
+  getRecipes(
+    page: number,
+    size: number,
+    searchTerm: string = '',
+    ingredients: string[] = []
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+
     if (searchTerm) {
-      url += `&name=${encodeURIComponent(searchTerm)}`;
+      params = params.append('name', searchTerm);
     }
-    return this.httpClient.get(url);
+
+    ingredients.forEach((ingredient) => {
+      params = params.append('ingredients[]', ingredient);
+    });
+    return this.httpClient.get(`/api/recipes`, { params });
   }
 
   getRecipeDetails(id: string) {
